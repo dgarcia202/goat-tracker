@@ -21,20 +21,22 @@
 
             <v-flex xs3>            
                 <v-text-field 
-                    label="Add inline" 
+                    label="Add feature inline" 
                     placeholder="Enter name and press enter" 
                     class="mt-4" />
             </v-flex>
         </v-toolbar>
                 
         <v-data-table
+            v-model="selected"
             :headers="headers"
             :items="rows"
             :search="search"
-            v-model="selected"
+            :rows-per-page-items="rowsPerPageItems"    
+            :loading="loading"
             item-key="code"
             select-all
-            :rows-per-page-items="rowsPerPageItems"    
+            
             class="elevation-1"
         >
             <template slot="items" slot-scope="props">
@@ -45,13 +47,15 @@
                     hide-details
                     ></v-checkbox>
                 </td>
-                <td class="text-xs-left"><a href="#">{{ props.item.code }}</a></td>
+                <td class="text-xs-left"><a href="#" @click="$router.push(`/feature/${props.item.id}`)">{{ props.item.code }}</a></td>
                 <td class="text-xs-left">{{ props.item.name }}</td>
                 <td class="text-xs-right">{{ props.item.estimation }}</td>
                 <td class="text-xs-right">{{ props.item.pctCompleted }}</td>
                 <td class="text-xs-left">{{ props.item.status.description }}</td>
                 <td class="justify-center layout px-0">
-                    <v-icon small class="mr-2 ml-3">edit</v-icon>
+                    <v-icon small class="mr-2 ml-3" @click="$router.push(`/feature/${props.item.id}`)">
+                        edit
+                    </v-icon>
                     <v-icon small>delete</v-icon>
                 </td>
             </template>
@@ -65,12 +69,13 @@ import config from '../config/Configuration'
 export default {
     name: 'BacklogManagement',
     props: ['projectId'],
-    data () {
+    data() {
       return {
         title: 'Release Backlog',
         search: '',
         selected: [],        
         rowsPerPageItems: config.rowsPerPageItems,
+        loading: false,
         headers: [
           {
             text: 'Feature',
@@ -90,9 +95,16 @@ export default {
     },
     methods: {
         fetchData() {
+            this.loading = true;
             axios
                 .get(`${config.apiBaseUrl}projects/${this.projectId}/features`)
-                .then(response => (this.rows = response.data));
+                .then(response => {
+                    this.rows = response.data;
+                    this.loading = false;
+                })
+                .catch(error => {
+                    this.loading = false;
+                });
         }
     },
     watch: {

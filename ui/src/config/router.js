@@ -21,6 +21,12 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ '../components/BacklogManagement.vue'),
       props: true
+    },
+    {
+      path: '/feature/:featureId',
+      name: 'feature_details',
+      component: () => import('../components/FeatureDetails.vue'),
+      props: true
     }
   ]
 })
