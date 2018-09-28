@@ -43,6 +43,7 @@ import config from '../config/Configuration'
 
 export default {
     name: 'BacklogManagement',
+    props: ['projectId'],
     data () {
       return {
         title: 'Release Backlog',

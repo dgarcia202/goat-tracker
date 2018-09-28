@@ -14,12 +14,13 @@ export default new Router({
       component: HelloWorld
     },
     {
-      path: '/backlog',
+      path: '/project/:projectId/backlog',
       name: 'backlog',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '../components/BacklogManagement.vue')
+      component: () => import(/* webpackChunkName: "about" */ '../components/BacklogManagement.vue'),
+      props: true
     }
   ]
 })

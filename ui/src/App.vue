@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     navigateToRoute: function (route) {
-      this.$router.push(route)
+      this.$router.push(`/project/${this.selectedProject}/${route}`)
     }
   } 
 }
