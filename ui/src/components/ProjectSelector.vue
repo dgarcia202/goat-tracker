@@ -31,7 +31,7 @@ export default {
         axios
         .get(config.apiBaseUrl + 'projects/')
         .then(response => {
-            this.projects = response.data._embedded.projects;
+            this.projects = response.data;
             this.$emit('input', this.projects[0].name);
         })
     }      
