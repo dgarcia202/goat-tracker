@@ -1,8 +1,8 @@
 package com.github.dgarcia202.goattracker.Configuration;
-
+/*
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
+import org.springframework.data.controllers.core.config.RepositoryRestConfiguration;
+import org.springframework.data.controllers.webmvc.config.RepositoryRestConfigurerAdapter;
 
 @Configuration
 public class GlobalRepositoryRestConfigurer extends RepositoryRestConfigurerAdapter {
@@ -16,4 +16,4 @@ public class GlobalRepositoryRestConfigurer extends RepositoryRestConfigurerAdap
                 .allowedMethods("*");
     }
 
-}
+}*/
