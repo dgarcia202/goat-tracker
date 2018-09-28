@@ -1,5 +1,9 @@
 <template>
     <div>
+        <!-- slide-y-transition -->
+        <v-alert v-model="alert.show" :type="alert.type" transition="slide-y-transition" dismissible>
+            {{alert.message}}
+        </v-alert>
         <v-toolbar flat color="white">
             <v-toolbar-title>{{ title }}</v-toolbar-title>
             <v-divider
@@ -71,11 +75,16 @@ export default {
     props: ['projectId'],
     data() {
       return {
-        title: 'Release Backlog',
+        title: 'Product Backlog',
         search: '',
         selected: [],        
         rowsPerPageItems: config.rowsPerPageItems,
         loading: false,
+        alert: {
+            show: false,
+            type: 'error',
+            message: 'lalalalalala'
+        },
         headers: [
           {
             text: 'Feature',
@@ -104,6 +113,12 @@ export default {
                 })
                 .catch(error => {
                     this.loading = false;
+                    this.alert.show = true;
+                    this.alert.message = config.apiDownMessage;
+                    let that = this;
+                    setTimeout(() => {
+                        that.alert.show = false;
+                    }, config.alertDismissDelayMillis);                    
                 });
         }
     },
