@@ -66,10 +66,20 @@ export default {
         rows: []
       };
     },
+    methods: {
+        fetchData() {
+            axios
+                .get(`${config.apiBaseUrl}projects/${this.projectId}/features`)
+                .then(response => (this.rows = response.data));
+        }
+    },
+    watch: {
+        projectId() {
+            this.fetchData();
+        }
+    },
     mounted () {
-        axios
-            .get(config.apiBaseUrl + 'features/')
-            .then(response => (this.rows = response.data))
+        this.fetchData();
     } 
 }
 </script>

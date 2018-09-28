@@ -83,6 +83,7 @@ export default {
   data() {
     return {
       selectedProject: null,
+      currentRoute: null,
       clipped: false,
       drawer: true,
       fixed: false,
@@ -94,9 +95,17 @@ export default {
       copyRightHolder: 'GoatSoft S.P.'
     }
   },
+  watch: {
+    selectedProject(newProjectId, oldProjectId) {
+      if (this.currentRoute != null) {
+        this.$router.push(`/project/${newProjectId}/${this.currentRoute}`);
+      }
+    }
+  },
   methods: {
     navigateToRoute: function (route) {
-      this.$router.push(`/project/${this.selectedProject}/${route}`)
+      this.$router.push(`/project/${this.selectedProject}/${route}`);
+      this.currentRoute = route;
     }
   } 
 }
