@@ -5,9 +5,7 @@ import com.github.dgarcia202.goattracker.repositories.ProjectRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-@RestController("/projects")
+@RestController
 public class ProjectController {
 
     private ProjectRepository projectRepository;
@@ -16,7 +14,7 @@ public class ProjectController {
         this.projectRepository = projectRepository;
     }
 
-    @GetMapping
+    @GetMapping("/projects")
     public Iterable<Project> getProjects() {
         return projectRepository.findAll();
     }
