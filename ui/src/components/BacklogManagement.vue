@@ -68,7 +68,7 @@ export default {
     mounted () {
         axios
             .get(config.apiBaseUrl + 'features/')
-            .then(response => (this.rows = response.data._embedded.features))
+            .then(response => (this.rows = response.data))
     } 
 }
 </script>

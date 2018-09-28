@@ -4,7 +4,7 @@
             :value="value"
             :items="projects"
             item-text="name"
-            item-value="name"     
+            item-value="id"     
             class="mr-5"   
             @input="selectValue"
         ></v-select>
@@ -32,7 +32,7 @@ export default {
         .get(config.apiBaseUrl + 'projects/')
         .then(response => {
             this.projects = response.data;
-            this.$emit('input', this.projects[0].name);
+            this.$emit('input', this.projects[0].id);
         })
     }      
 }
