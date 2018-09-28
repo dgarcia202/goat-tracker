@@ -7,7 +7,24 @@
                 inset
                 vertical
             ></v-divider>
+            
             <v-spacer></v-spacer>
+            <v-btn color="success" fab small dark class="mt-2">
+                <v-icon>add</v-icon>
+            </v-btn>
+            <v-btn color="primary" fab small dark class="mt-2">
+                <v-icon>filter_list</v-icon>
+            </v-btn>
+            <v-btn color="error" fab small dark class="mr-4 mt-2">
+                <v-icon>delete</v-icon>
+            </v-btn>
+
+            <v-flex xs3>            
+                <v-text-field 
+                    label="Add inline" 
+                    placeholder="Enter name and press enter" 
+                    class="mt-4" />
+            </v-flex>
         </v-toolbar>
                 
         <v-data-table
@@ -28,11 +45,15 @@
                     hide-details
                     ></v-checkbox>
                 </td>
-                <td class="text-xs-left">{{ props.item.code }}</td>
+                <td class="text-xs-left"><a href="#">{{ props.item.code }}</a></td>
                 <td class="text-xs-left">{{ props.item.name }}</td>
                 <td class="text-xs-right">{{ props.item.estimation }}</td>
                 <td class="text-xs-right">{{ props.item.pctCompleted }}</td>
                 <td class="text-xs-left">{{ props.item.status.description }}</td>
+                <td class="justify-center layout px-0">
+                    <v-icon small class="mr-2 ml-3">edit</v-icon>
+                    <v-icon small>delete</v-icon>
+                </td>
             </template>
         </v-data-table>
     </div>
@@ -61,7 +82,8 @@ export default {
           { text: 'Name', align: 'left', sortable: true, value: 'name', width: '50%' },
           { text: 'Estimation', align: 'right', value: 'estimation', width: '10%' },
           { text: '% Completed', align: 'right', value: 'completed', width: '10%' },
-          { text: 'Status', value: 'status', width: '15%' }
+          { text: 'Status', value: 'status', width: '10%' },
+          { text: 'Actions', value: 'actions', align: 'center', width: '10%' }
         ],
         rows: []
       };

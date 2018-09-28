@@ -1,7 +1,7 @@
 export default function mainMenuItems() {
     return [{
         icon: 'all_inbox',
-        title: 'Release Backlog',
+        title: 'Product Backlog',
         route: 'backlog'
       },
       {
