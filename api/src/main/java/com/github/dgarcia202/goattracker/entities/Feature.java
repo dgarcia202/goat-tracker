@@ -13,6 +13,8 @@ public class Feature {
     @Id
     private UUID id;
 
+    private UUID projectId;
+
     private String code;
 
     private String name;
