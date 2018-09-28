@@ -2,7 +2,7 @@ import '@babel/polyfill'
 import Vue from 'vue'
 import './plugins/vuetify'
 import App from './App.vue'
-import router from './config/router'
+import router from './config/Router'
 
 Vue.config.productionTip = false
 
