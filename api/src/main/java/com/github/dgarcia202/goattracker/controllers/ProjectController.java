@@ -2,7 +2,7 @@ package com.github.dgarcia202.goattracker.controllers;
 
 import com.github.dgarcia202.goattracker.entities.Feature;
 import com.github.dgarcia202.goattracker.entities.Project;
-import com.github.dgarcia202.goattracker.exceptions.ProjectNotFoundException;
+import com.github.dgarcia202.goattracker.exceptions.NotFoundException;
 import com.github.dgarcia202.goattracker.repositories.FeatureRepository;
 import com.github.dgarcia202.goattracker.repositories.ProjectRepository;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +33,7 @@ public class ProjectController {
     public Project getProject(@PathVariable UUID id) {
         Optional<Project> option = projectRepository.findById(id);
         if (!option.isPresent()) {
-            throw new ProjectNotFoundException();
+            throw new NotFoundException();
         }
 
         return option.get();
@@ -43,9 +43,24 @@ public class ProjectController {
     public Iterable<Feature> getProjectFeatures(@PathVariable UUID id) {
         Optional<Project> option = projectRepository.findById(id);
         if (!option.isPresent()) {
-            throw new ProjectNotFoundException();
+            throw new NotFoundException();
         }
 
         return featureRepository.findByProjectId(id);
+    }
+
+    @GetMapping("/projects/{projectId}/features/{featureId}")
+    public Feature getProjectFeature(@PathVariable UUID projectId, @PathVariable UUID featureId) {
+        Optional<Feature> option = featureRepository.findById(featureId);
+        if (!option.isPresent()) {
+            throw new NotFoundException();
+        }
+
+        Feature f = option.get();
+        if (f.getProjectId() != projectId) {
+            throw new NotFoundException();
+        }
+
+        return f;
     }
 }

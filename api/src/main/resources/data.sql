@@ -8,10 +8,10 @@ insert into release values ('0a197872-b403-11e8-96f8-529269fb1459', '7aca8ada-b3
 
 insert into release values ('4fb4d4d4-c0c5-11e8-a355-529269fb1459', '7aca9476-b3a8-11e8-96f8-529269fb1459', '1.0.0');
 
-insert into feature_status values ('c9744fbf-1597-4d7f-8bd0-2a134a1bda42', 'Defined');
-insert into feature_status values ('5f75c2a1-5233-4132-b29f-20fa5fd1e42f', 'In Progess');
-insert into feature_status values ('d17b4c24-956b-4474-b21d-a2606b9cdd10', 'Completed');
-insert into feature_status values ('a59835be-f2f8-4c88-b539-b9b03d4c72f9', 'Accepted');
+insert into feature_status values ('c9744fbf-1597-4d7f-8bd0-2a134a1bda42', 'Defined', 0);
+insert into feature_status values ('5f75c2a1-5233-4132-b29f-20fa5fd1e42f', 'In Progess', 1);
+insert into feature_status values ('d17b4c24-956b-4474-b21d-a2606b9cdd10', 'Completed', 2);
+insert into feature_status values ('a59835be-f2f8-4c88-b539-b9b03d4c72f9', 'Accepted', 3);
 
 -- features
 insert into feature (id, code, project_id, release_id, name, description, feature_status_id) values ('b0111f15-df21-48bc-97de-9a88a533f454', '00000001', '7aca8ada-b3a8-11e8-96f8-529269fb1459', '0a196fbc-b403-11e8-96f8-529269fb1459', 'erat tortor sollicitudin', 'Ut tellus. Nulla ut erat id mauris vulputate elementum.', '5f75c2a1-5233-4132-b29f-20fa5fd1e42f');

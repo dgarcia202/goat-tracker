@@ -16,4 +16,6 @@ public class FeatureStatus {
     private UUID id;
 
     private String description;
+
+    private Integer order;
 }

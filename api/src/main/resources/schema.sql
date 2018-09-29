@@ -32,6 +32,7 @@ CREATE TABLE release (
 CREATE TABLE feature_status (
     id UUID PRIMARY KEY,
     description TEXT NOT NULL,
+    "order" SMALLINT NOT NULL,
     CONSTRAINT feature_status_desc_uq UNIQUE (description)
 );
 
