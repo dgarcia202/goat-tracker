@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 100%;">
+    <div class="full-width">
         <v-alert v-model="alert.show" :type="alert.type" transition="slide-y-transition" dismissible
             class="custom-alert">
             {{alert.message}}

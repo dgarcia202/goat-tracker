@@ -1,3 +1,7 @@
+.full-width {
+    width: 100%;
+}
+
 .custom-alert {
     position: absolute !important; 
     z-index: 9999; 
