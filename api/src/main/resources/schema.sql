@@ -1,3 +1,5 @@
+DROP INDEX IF EXISTS feature_project_id_ix;
+
 DROP TABLE IF EXISTS team_project;
 DROP TABLE IF EXISTS iteration_user_story;
 DROP TABLE IF EXISTS team_member;
@@ -40,15 +42,14 @@ CREATE TABLE feature (
 	release_id UUID NOT NULL,
 	"name" TEXT NOT NULL,
 	description TEXT,
-	estimation INTEGER,
-	pct_completed SMALLINT NOT NULL DEFAULT 0,
 	feature_status_id UUID NOT NULL,
 	FOREIGN KEY(project_id) REFERENCES project(id),
 	FOREIGN KEY(release_id) REFERENCES release(id),
 	FOREIGN KEY(feature_status_id) REFERENCES feature_status(id),
-	CONSTRAINT feature_code_uq UNIQUE (code),
-	CONSTRAINT feature_pct_completed_ck CHECK (pct_completed >= 0 AND pct_completed <= 100)
+	CONSTRAINT feature_code_uq UNIQUE (code)
 );
+
+CREATE INDEX feature_project_id_ix ON feature(project_id);
 
 CREATE TABLE user_story (
 	id UUID PRIMARY KEY,

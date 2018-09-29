@@ -15,15 +15,15 @@ public class Feature {
 
     private UUID projectId;
 
+    @ManyToOne
+    @JoinColumn(name = "release_id")
+    private Release release;
+
     private String code;
 
     private String name;
 
     private String description;
-
-    private Integer estimation;
-
-    private Integer pctCompleted;
 
     @ManyToOne
     @JoinColumn(name = "feature_status_id")

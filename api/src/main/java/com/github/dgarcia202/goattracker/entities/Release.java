@@ -16,8 +16,4 @@ public class Release {
     private UUID id;
 
     private String version;
-
-    @OneToMany
-    @JoinColumn(name = "release_id")
-    private List<Feature> features = new ArrayList<>();
 }
