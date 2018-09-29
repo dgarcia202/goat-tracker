@@ -1,0 +1,5 @@
+.custom-alert {
+    position: absolute !important; 
+    z-index: 9999; 
+    width: 100%;
+}

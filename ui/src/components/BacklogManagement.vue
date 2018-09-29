@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <!-- slide-y-transition -->
-        <v-alert v-model="alert.show" :type="alert.type" transition="slide-y-transition" dismissible>
+    <div style="width: 100%;">
+        <v-alert v-model="alert.show" :type="alert.type" transition="slide-y-transition" dismissible
+            class="custom-alert">
             {{alert.message}}
         </v-alert>
         <v-toolbar flat color="white">
@@ -111,7 +111,7 @@ export default {
                     this.rows = response.data;
                     this.loading = false;
                 })
-                .catch(error => {
+                .catch(() => {
                     this.loading = false;
                     this.alert.show = true;
                     this.alert.message = config.apiDownMessage;
