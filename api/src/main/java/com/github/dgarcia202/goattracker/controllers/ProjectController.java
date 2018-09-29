@@ -57,7 +57,7 @@ public class ProjectController {
         }
 
         Feature f = option.get();
-        if (f.getProjectId() != projectId) {
+        if (!f.getProjectId().equals(projectId)) {
             throw new NotFoundException();
         }
 
