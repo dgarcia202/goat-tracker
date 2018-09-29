@@ -23,7 +23,7 @@ export default new Router({
       props: true
     },
     {
-      path: '/feature/:featureId',
+      path: '/project/:projectId/feature/:featureId',
       name: 'feature_details',
       component: () => import('../components/FeatureDetails.vue'),
       props: true

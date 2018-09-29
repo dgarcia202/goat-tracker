@@ -24,21 +24,19 @@
                         <v-layout row wrap>
                             <v-flex xs2>
                                 <v-text-field
-                                v-model="name"
-                                :rules="nameRules"
+                                v-model="item.code"
                                 label="code"
-                                value="00000001"
                                 required>00000002</v-text-field>
                             </v-flex>
                             <v-flex xs10>
                                 <v-text-field
-                                v-model="name"
-                                :rules="nameRules"
+                                v-model="item.name"
                                 label="Name"
                                 required />
                             </v-flex>
                             <v-flex xs12>
                                 <v-textarea
+                                v-model="item.description"
                                 name="input-7-1"
                                 label="Description"
                                 ></v-textarea>
@@ -82,17 +80,26 @@ import config from '../config/Configuration'
 
 export default {
     name: 'FeatureDetails',
-    props: ['featureId'],
+    props: [ 'projectId', 'featureId' ],
     data() {
         return {
             selectedTab: null,
-            tabTitles: [ 'Feature', 'Users Stories', 'Relationships', 'Discussion', 'Audit' ]
+            tabTitles: [ 'Feature', 'Users Stories', 'Relationships', 'Discussion', 'Audit' ],
+            item: null,
+            valid: true
         };
     },
     methods: {
         fetchData() {
-
+            axios
+                .get(`${config.apiBaseUrl}projects/${this.projectId}/features/${this.featureId}`)
+                .then(response => {
+                    this.item = response.data;
+                })
         }
-    }
+    },
+    mounted () {
+        this.fetchData();
+    }     
 }
 </script>

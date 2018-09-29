@@ -51,13 +51,12 @@
                     hide-details
                     ></v-checkbox>
                 </td>
-                <td class="text-xs-left"><a href="#" @click="$router.push(`/feature/${props.item.id}`)">{{ props.item.code }}</a></td>
+                <td class="text-xs-left"><a href="#" @click="$router.push(`/project/${props.item.projectId}/feature/${props.item.id}`)">{{ props.item.code }}</a></td>
                 <td class="text-xs-left">{{ props.item.name }}</td>
-                <td class="text-xs-right">{{ props.item.estimation }}</td>
-                <td class="text-xs-right">{{ props.item.pctCompleted }}</td>
+                <td class="text-xs-left">{{ props.item.release.version }}</td>
                 <td class="text-xs-left">{{ props.item.status.description }}</td>
                 <td class="justify-center layout px-0">
-                    <v-icon small class="mr-2 ml-3" @click="$router.push(`/feature/${props.item.id}`)">
+                    <v-icon small class="mr-2 ml-3" @click="$router.push(`/project/${props.item.projectId}/feature/${props.item.id}`)">
                         edit
                     </v-icon>
                     <v-icon small>delete</v-icon>
@@ -72,7 +71,7 @@ import config from '../config/Configuration'
 
 export default {
     name: 'BacklogManagement',
-    props: ['projectId'],
+    props: [ 'projectId' ],
     data() {
       return {
         title: 'Product Backlog',
@@ -83,7 +82,7 @@ export default {
         alert: {
             show: false,
             type: 'error',
-            message: 'lalalalalala'
+            message: null
         },
         headers: [
           {
@@ -94,8 +93,7 @@ export default {
             width: '10%'
           },
           { text: 'Name', align: 'left', sortable: true, value: 'name', width: '50%' },
-          { text: 'Estimation', align: 'right', value: 'estimation', width: '10%' },
-          { text: '% Completed', align: 'right', value: 'completed', width: '10%' },
+          { text: 'Release', align: 'left', value: 'completed', width: '20%' },
           { text: 'Status', value: 'status', width: '10%' },
           { text: 'Actions', value: 'actions', align: 'center', width: '10%' }
         ],
