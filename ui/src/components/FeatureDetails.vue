@@ -85,7 +85,7 @@ export default {
         return {
             selectedTab: null,
             tabTitles: [ 'Feature', 'Users Stories', 'Relationships', 'Discussion', 'Audit' ],
-            item: null,
+            item: { code: null, name: null, description: null },
             valid: true,
             loading: true
         };
