@@ -1,5 +1,6 @@
 <template>
     <div>
+        <v-progress-linear :indeterminate="true" height="3" class="ma-0 form-top-loader" v-if="loading"></v-progress-linear>
         <v-tabs
             slot="extension"
             v-model="selectedTab"
@@ -15,7 +16,6 @@
             {{ item }}
             </v-tab>
         </v-tabs>
-
         <v-tabs-items v-model="selectedTab">
 
             <v-tab-item key="Feature">
@@ -86,7 +86,8 @@ export default {
             selectedTab: null,
             tabTitles: [ 'Feature', 'Users Stories', 'Relationships', 'Discussion', 'Audit' ],
             item: null,
-            valid: true
+            valid: true,
+            loading: true
         };
     },
     methods: {
