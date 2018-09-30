@@ -14,10 +14,10 @@
 <script>
 export default {
     name: 'GridToolBar',
-    props: { 
-        showAdd: true, 
-        showFilter: true, 
-        showDelete: true 
+    props: {
+        showAdd: { type: Boolean, default: true },
+        showFilter: { type: Boolean, default: true },
+        showDelete: { type: Boolean, default: true }
     },
     data() {
         return {

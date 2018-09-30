@@ -14,7 +14,7 @@
             
             <v-spacer></v-spacer>
 
-            <grid-tool-bar show-add="true" show-filter="true" show-delete="true"
+            <grid-tool-bar
                 @click-add="$router.push(`/project/${projectId}/feature`)" />
 
             <v-flex xs3>            

@@ -2,18 +2,30 @@
     <v-form v-model="valid" class="mx-4">
         <v-container grid-list-md text-xs-center fluid>
             <v-layout row wrap>
-                <v-flex xs2>
-                    <v-text-field
-                    v-model="value.code"
-                    label="code"
-                    required></v-text-field>
-                </v-flex>
-                <v-flex xs10>
-                    <v-text-field
-                    v-model="value.name"
-                    label="Name"
-                    required />
-                </v-flex>
+
+                <template v-if="mode == 'edit'">
+                    <v-flex xs1>
+                        <v-text-field
+                        v-model="value.code"
+                        label="code"
+                        required></v-text-field>
+                    </v-flex>
+                    <v-flex xs11>
+                        <v-text-field
+                        v-model="value.name"
+                        label="Name"
+                        required />
+                    </v-flex>
+                </template>
+                <template v-else>
+                    <v-flex xs12>
+                        <v-text-field
+                        v-model="value.name"
+                        label="Name"
+                        required />
+                    </v-flex>
+                </template>
+
                 <v-flex xs12>
                     <v-textarea
                     v-model="value.description"
@@ -51,7 +63,7 @@
 <script>
 export default {
     name: 'FeatureDetailsMain',
-    props: [ 'value', 'releases', 'statuses' ],
+    props: [ 'value', 'releases', 'statuses', 'mode' ],
     data() {
         return {
             valid: true

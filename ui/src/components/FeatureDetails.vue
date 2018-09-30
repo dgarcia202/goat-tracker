@@ -22,7 +22,9 @@
                 <feature-details-main 
                     v-model="item" 
                     :releases="releases"
-                    :statuses="statuses"/>
+                    :statuses="statuses"
+                    :mode="currentMode" />
+
             </v-tab-item>
 
             <v-tab-item key="User Stories">
@@ -76,36 +78,48 @@ export default {
         };
     },
     methods: {
-        isCreateMode() {
-            return this.featureId == null;
-        },
-        isEditMode() {
-            return !this.isCreateMode();
-        },
-        currentMode() {
-            return this.isCreateMode() ? 'create' : 'edit';
-        },
         fetchData() {
-            axios.all([
+
+            let requests = [
                 () => axios.get(`${config.apiBaseUrl}feature-statuses`),
-                () => axios.get(`${config.apiBaseUrl}projects/${this.projectId}`),
-                () => axios.get(`${config.apiBaseUrl}projects/${this.projectId}/features/${this.featureId}`)
-            ])
+                () => axios.get(`${config.apiBaseUrl}projects/${this.projectId}`)
+            ]
+
+            if (this.isEditMode) {
+                requests.push(() => axios.get(`${config.apiBaseUrl}projects/${this.projectId}/features/${this.featureId}`));
+            }
+
+            axios.all(requests)
             .then(axios.spread((statuses, project, feature) => {
                 statuses().then(response => this.statuses = response.data);
                 project().then(response => this.releases = response.data.releases);
-                feature().then(response => { 
-                    this.item = response.data;
-                    this.item.releaseId = this.item.release.id;
-                    this.item.statusId = this.item.status.id;
-                    delete this.item.release;
-                    delete this.item.status;
-                });
+                
+                if (typeof feature !== 'undefined') {
+                    feature().then(response => { 
+                        this.item = response.data;
+                        this.item.releaseId = this.item.release.id;
+                        this.item.statusId = this.item.status.id;
+                        delete this.item.release;
+                        delete this.item.status;
+                    });
+                }
+
                 this.loading = false;
             }))
             .catch(() => {
                 this.loading = false;
             });
+        }
+    },
+    computed: {
+        isCreateMode() {
+            return this.featureId == null;
+        },
+        isEditMode() {
+            return !this.isCreateMode;
+        },
+        currentMode() {
+            return this.isCreateMode ? 'create' : 'edit';
         }
     },
     mounted () {
