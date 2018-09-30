@@ -19,7 +19,10 @@
         <v-tabs-items v-model="selectedTab">
 
             <v-tab-item key="Feature">
-                <FeatureDetailsMain v-model="item" />
+                <FeatureDetailsMain 
+                    v-model="item" 
+                    :releases="releases"
+                    :statuses="statuses"/>
             </v-tab-item>
 
             <v-tab-item key="User Stories">
@@ -61,23 +64,37 @@ export default {
     components: { FeatureDetailsMain },
     data() {
         return {
+            loading: true,
             selectedTab: null,
             tabTitles: [ 'Feature', 'Users Stories', 'Relationships', 'Discussion', 'Audit' ],
             item: { code: null, name: null, description: null },
-            loading: true
+            releases: [],
+            statuses: []
         };
     },
     methods: {
         fetchData() {
-            axios
-                .get(`${config.apiBaseUrl}projects/${this.projectId}/features/${this.featureId}`)
-                .then(response => {
+
+            axios.all([
+                () => axios.get(`${config.apiBaseUrl}feature-statuses`),
+                () => axios.get(`${config.apiBaseUrl}projects/${this.projectId}`),
+                () => axios.get(`${config.apiBaseUrl}projects/${this.projectId}/features/${this.featureId}`)
+            ])
+            .then(axios.spread((statuses, project, feature) => {
+                statuses().then(response => this.statuses = response.data);
+                project().then(response => this.releases = response.data.releases);
+                feature().then(response => { 
                     this.item = response.data;
-                    this.loading = false;
-                })
-                .catch(() => {
-                    this.loading = false;
+                    this.item.releaseId = this.item.release.id;
+                    this.item.statusId = this.item.status.id;
+                    delete this.item.release;
+                    delete this.item.status;
                 });
+                this.loading = false;
+            }))
+            .catch(() => {
+                this.loading = false;
+            });
         }
     },
     mounted () {

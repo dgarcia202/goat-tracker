@@ -21,6 +21,29 @@
                     label="Description"
                     ></v-textarea>
                 </v-flex>
+
+                <v-flex xs2>
+                    <v-select
+                        v-model="value.statusId"
+                        :items="statuses"
+                        item-text="description"
+                        item-value="id"     
+                        label="Status"
+                        @input="$emit('input', value)"
+                    ></v-select>
+                </v-flex>
+                <v-spacer></v-spacer>
+                <v-flex xs2>
+                    <v-select
+                        v-model="value.releaseId"
+                        :items="releases"
+                        item-text="version"
+                        item-value="id"     
+                        label="Release"
+                        @input="$emit('input', value)"
+                    ></v-select>
+                </v-flex>              
+                     
             </v-layout>
         </v-container>
     </v-form>
@@ -28,7 +51,7 @@
 <script>
 export default {
     name: 'FeatureDetailsMain',
-    props: [ 'value' ],
+    props: [ 'value', 'releases', 'statuses' ],
     data() {
         return {
             valid: true
