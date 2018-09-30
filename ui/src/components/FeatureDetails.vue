@@ -19,7 +19,7 @@
         <v-tabs-items v-model="selectedTab">
 
             <v-tab-item key="Feature">
-                <FeatureDetailsMain 
+                <feature-details-main 
                     v-model="item" 
                     :releases="releases"
                     :statuses="statuses"/>
@@ -60,7 +60,10 @@ import FeatureDetailsMain from './FeatureDetailsMain'
 
 export default {
     name: 'FeatureDetails',
-    props: [ 'projectId', 'featureId' ],
+    props: {
+        projectId: null,
+        featureId: null
+    },
     components: { FeatureDetailsMain },
     data() {
         return {
@@ -73,8 +76,16 @@ export default {
         };
     },
     methods: {
+        isCreateMode() {
+            return this.featureId == null;
+        },
+        isEditMode() {
+            return !this.isCreateMode();
+        },
+        currentMode() {
+            return this.isCreateMode() ? 'create' : 'edit';
+        },
         fetchData() {
-
             axios.all([
                 () => axios.get(`${config.apiBaseUrl}feature-statuses`),
                 () => axios.get(`${config.apiBaseUrl}projects/${this.projectId}`),

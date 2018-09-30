@@ -13,15 +13,9 @@
             ></v-divider>
             
             <v-spacer></v-spacer>
-            <v-btn color="success" fab small dark class="mt-2">
-                <v-icon>add</v-icon>
-            </v-btn>
-            <v-btn color="primary" fab small dark class="mt-2">
-                <v-icon>filter_list</v-icon>
-            </v-btn>
-            <v-btn color="error" fab small dark class="mr-4 mt-2">
-                <v-icon>delete</v-icon>
-            </v-btn>
+
+            <grid-tool-bar show-add="true" show-filter="true" show-delete="true"
+                @click-add="$router.push(`/project/${projectId}/feature`)" />
 
             <v-flex xs3>            
                 <v-text-field 
@@ -68,10 +62,12 @@
 <script>
 import axios from '../../node_modules/axios/dist/axios.min'
 import config from '../config/Configuration'
+import GridToolBar from './GridToolBar'
 
 export default {
     name: 'BacklogManagement',
     props: [ 'projectId' ],
+    components: { GridToolBar },
     data() {
       return {
         title: 'Product Backlog',

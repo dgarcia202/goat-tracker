@@ -38,7 +38,7 @@
       </v-btn>
       <v-toolbar-title v-text="title"></v-toolbar-title>
       <v-spacer></v-spacer>
-      <ProjectSelector v-model="selectedProject" />
+      <project-selector v-model="selectedProject" />
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>menu</v-icon>
       </v-btn>
@@ -69,15 +69,12 @@
 </template>
 
 <script>
-import config from './config/Configuration'
 import mainMenuItems from './config/MainMenu'
 import ProjectSelector from './components/ProjectSelector'
-import BacklogManagement from './components/BacklogManagement'
 
 export default {
   name: 'App',
   components: {
-    BacklogManagement,
     ProjectSelector
   },
   data() {
@@ -96,7 +93,7 @@ export default {
     }
   },
   watch: {
-    selectedProject(newProjectId, oldProjectId) {
+    selectedProject(newProjectId) {
       if (this.currentRoute != null) {
         this.$router.push(`/project/${newProjectId}/${this.currentRoute}`);
       }
