@@ -26,7 +26,7 @@
                                 <v-text-field
                                 v-model="item.code"
                                 label="code"
-                                required>00000002</v-text-field>
+                                required></v-text-field>
                             </v-flex>
                             <v-flex xs10>
                                 <v-text-field
@@ -96,7 +96,11 @@ export default {
                 .get(`${config.apiBaseUrl}projects/${this.projectId}/features/${this.featureId}`)
                 .then(response => {
                     this.item = response.data;
+                    this.loading = false;
                 })
+                .catch(() => {
+                    this.loading = false;
+                });
         }
     },
     mounted () {

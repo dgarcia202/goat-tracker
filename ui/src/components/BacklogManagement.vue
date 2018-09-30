@@ -85,13 +85,7 @@ export default {
             message: null
         },
         headers: [
-          {
-            text: 'Feature',
-            align: 'left',
-            sortable: true,
-            value: 'feature',
-            width: '10%'
-          },
+          { text: 'Feature', align: 'left', sortable: true, value: 'feature', width: '10%' },
           { text: 'Name', align: 'left', sortable: true, value: 'name', width: '50%' },
           { text: 'Release', align: 'left', value: 'completed', width: '20%' },
           { text: 'Status', value: 'status', width: '10%' },
