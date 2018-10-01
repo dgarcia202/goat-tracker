@@ -7,6 +7,7 @@
                     <v-flex xs1>
                         <v-text-field
                         v-model="value.code"
+                        readonly="true"
                         label="code"
                         required></v-text-field>
                     </v-flex>

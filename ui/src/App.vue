@@ -44,7 +44,9 @@
       </v-btn>
     </v-toolbar>
     <v-content>
-      <router-view/>
+      <transition name="slide-fade">
+        <router-view></router-view>
+      </transition>
     </v-content>
     <v-navigation-drawer
       temporary
@@ -107,3 +109,15 @@ export default {
   } 
 }
 </script>
+<style>
+.slide-fade-enter-active {
+  transition: all .5s ease;
+}
+.slide-fade-leave-active {
+  transition-duration: 0;
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+</style>
