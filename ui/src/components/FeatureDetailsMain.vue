@@ -7,7 +7,7 @@
                     <v-flex xs1>
                         <v-text-field
                         v-model="value.code"
-                        readonly="true"
+                        :readonly="true"
                         label="code"
                         required></v-text-field>
                     </v-flex>
@@ -56,7 +56,14 @@
                         @input="$emit('input', value)"
                     ></v-select>
                 </v-flex>              
-                     
+            </v-layout>
+            <v-layout row class="mt-5">
+                <v-spacer></v-spacer>
+                <v-flex xs3 class="mt-5" >
+                    <v-btn color="success">Save</v-btn>
+                    <v-btn color="success">Save and new</v-btn>
+                    <v-btn color="error" @click="$router.push(`/project/${projectId}/backlog`)">Cancel</v-btn>
+                </v-flex>
             </v-layout>
         </v-container>
     </v-form>
@@ -64,7 +71,7 @@
 <script>
 export default {
     name: 'FeatureDetailsMain',
-    props: [ 'value', 'releases', 'statuses', 'mode' ],
+    props: [ 'value', 'projectId', 'releases', 'statuses', 'mode' ],
     data() {
         return {
             valid: true

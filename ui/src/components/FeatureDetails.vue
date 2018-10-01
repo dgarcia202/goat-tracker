@@ -21,6 +21,7 @@
             <v-tab-item key="Feature">
                 <feature-details-main 
                     v-model="item" 
+                    :project-id="projectId"
                     :releases="releases"
                     :statuses="statuses"
                     :mode="currentMode" />
