@@ -1,4 +1,4 @@
-package com.github.dgarcia202.goattracker;
+package com.github.dgarcia202.goattracker.integration;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,5 +12,4 @@ public class GoatTrackerApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

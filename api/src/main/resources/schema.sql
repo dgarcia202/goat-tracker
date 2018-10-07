@@ -45,7 +45,7 @@ CREATE TABLE feature (
 	description TEXT,
 	feature_status_id UUID NOT NULL,
 	FOREIGN KEY(project_id) REFERENCES project(id),
-	FOREIGN KEY(release_id) REFERENCES release(id),
+	FOREIGN KEY(release_id) REFERENCES "release"(id),
 	FOREIGN KEY(feature_status_id) REFERENCES feature_status(id),
 	CONSTRAINT feature_code_uq UNIQUE (code)
 );

@@ -1,6 +1,6 @@
 insert into project values ('7aca8ada-b3a8-11e8-96f8-529269fb1459', 'Super Nice Product', NULL);
 insert into project values ('7aca8eae-b3a8-11e8-96f8-529269fb1459', 'Acme Legacy System', NULL);
-insert into project values ('7aca9476-b3a8-11e8-96f8-529269fb1459', 'Awesome Office Suite', NULL);
+insert into project values ('7aca9476-b3a8-11e8-96f8-529269fb1459', 'Awesome Office Suite Diego', NULL);
 
 insert into release values ('0a196fbc-b403-11e8-96f8-529269fb1459', '7aca8ada-b3a8-11e8-96f8-529269fb1459', '1.0.0');
 insert into release values ('0a1975ac-b403-11e8-96f8-529269fb1459', '7aca8ada-b3a8-11e8-96f8-529269fb1459', '1.1.0');
