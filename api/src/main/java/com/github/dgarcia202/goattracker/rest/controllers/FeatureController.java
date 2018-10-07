@@ -2,13 +2,16 @@ package com.github.dgarcia202.goattracker.rest.controllers;
 
 import com.github.dgarcia202.goattracker.entities.Feature;
 import com.github.dgarcia202.goattracker.entities.FeatureStatus;
+import com.github.dgarcia202.goattracker.entities.builders.FeatureBuilder;
+import com.github.dgarcia202.goattracker.exceptions.MissingFoundationDataException;
 import com.github.dgarcia202.goattracker.exceptions.NotFoundException;
 import com.github.dgarcia202.goattracker.repositories.FeatureRepository;
 import com.github.dgarcia202.goattracker.repositories.FeatureStatusRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.github.dgarcia202.goattracker.rest.rto.AddFeatureRto;
+import com.github.dgarcia202.goattracker.services.AddFeatureService;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -19,9 +22,16 @@ public class FeatureController {
 
     private FeatureStatusRepository featureStatusRepository;
 
-    public FeatureController(FeatureRepository featureRepository, FeatureStatusRepository featureStatusRepository) {
+    private AddFeatureService addFeatureService;
+
+    public FeatureController(
+            FeatureRepository featureRepository,
+            FeatureStatusRepository featureStatusRepository,
+            AddFeatureService addFeatureService) {
+
         this.featureRepository = featureRepository;
         this.featureStatusRepository = featureStatusRepository;
+        this.addFeatureService = addFeatureService;
     }
 
     @GetMapping("/features")
@@ -42,5 +52,12 @@ public class FeatureController {
     @GetMapping("/feature-statuses")
     public Iterable<FeatureStatus> getFeatureStatuses() {
         return featureStatusRepository.findAllByOrderByOrderAsc();
+    }
+
+    @PostMapping("/features")
+    public Feature addFeature(@Valid @RequestBody AddFeatureRto req)
+            throws MissingFoundationDataException {
+
+        return addFeatureService.add(req);
     }
 }

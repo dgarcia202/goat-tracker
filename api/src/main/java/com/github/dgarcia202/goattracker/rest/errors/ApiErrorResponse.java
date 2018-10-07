@@ -9,7 +9,7 @@ import java.util.Date;
 @Getter
 @ToString
 @EqualsAndHashCode
-public abstract class ApiErrorBase {
+public class ApiErrorResponse {
 
     private Date timestamp;
 
@@ -17,7 +17,7 @@ public abstract class ApiErrorBase {
 
     private String message;
 
-    public ApiErrorBase(Integer status, String message) {
+    public ApiErrorResponse(Integer status, String message) {
         this.timestamp = new Date();
         this.status = status;
         this.message = message;
