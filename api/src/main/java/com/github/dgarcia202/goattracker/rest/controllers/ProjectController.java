@@ -1,18 +1,20 @@
-package com.github.dgarcia202.goattracker.controllers;
+package com.github.dgarcia202.goattracker.rest.controllers;
 
 import com.github.dgarcia202.goattracker.entities.Feature;
 import com.github.dgarcia202.goattracker.entities.Project;
+import com.github.dgarcia202.goattracker.entities.builders.ProjectBuilder;
 import com.github.dgarcia202.goattracker.exceptions.NotFoundException;
 import com.github.dgarcia202.goattracker.repositories.FeatureRepository;
 import com.github.dgarcia202.goattracker.repositories.ProjectRepository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import com.github.dgarcia202.goattracker.rest.rto.AddProjectRto;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/projects")
 public class ProjectController {
 
     private ProjectRepository projectRepository;
@@ -24,12 +26,12 @@ public class ProjectController {
         this.featureRepository = featureRepository;
     }
 
-    @GetMapping("/projects")
+    @GetMapping
     public Iterable<Project> getProjects() {
         return projectRepository.findAll();
     }
 
-    @GetMapping("/projects/{id}")
+    @GetMapping("/{id}")
     public Project getProject(@PathVariable UUID id) {
         Optional<Project> option = projectRepository.findById(id);
         if (!option.isPresent()) {
@@ -39,7 +41,7 @@ public class ProjectController {
         return option.get();
     }
 
-    @GetMapping("/projects/{id}/features")
+    @GetMapping("/{id}/features")
     public Iterable<Feature> getProjectFeatures(@PathVariable UUID id) {
         Optional<Project> option = projectRepository.findById(id);
         if (!option.isPresent()) {
@@ -49,7 +51,7 @@ public class ProjectController {
         return featureRepository.findByProjectId(id);
     }
 
-    @GetMapping("/projects/{projectId}/features/{featureId}")
+    @GetMapping("/{projectId}/features/{featureId}")
     public Feature getProjectFeature(@PathVariable UUID projectId, @PathVariable UUID featureId) {
         Optional<Feature> option = featureRepository.findById(featureId);
         if (!option.isPresent()) {
@@ -62,5 +64,17 @@ public class ProjectController {
         }
 
         return f;
+    }
+
+    @PostMapping
+    public Project addProject(@Valid @RequestBody AddProjectRto req) {
+
+        Project p = ProjectBuilder.aProject()
+                .withId(UUID.randomUUID())
+                .withName(req.getName())
+                .withDescription(req.getDescription())
+                .build();
+
+        return projectRepository.save(p);
     }
 }

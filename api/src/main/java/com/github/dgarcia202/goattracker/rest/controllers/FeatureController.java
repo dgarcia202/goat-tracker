@@ -1,4 +1,4 @@
-package com.github.dgarcia202.goattracker.controllers;
+package com.github.dgarcia202.goattracker.rest.controllers;
 
 import com.github.dgarcia202.goattracker.entities.Feature;
 import com.github.dgarcia202.goattracker.entities.FeatureStatus;
